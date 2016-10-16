@@ -1,0 +1,38 @@
+% IS_MEMBER() PERFORMANCE TEST
+
+I = randi(30,[1 30]);
+C = randi(30,[1 15]);
+n = size(I,2);
+
+tic;
+a = ismember(I,C);
+toc;
+
+tic;
+b = zeros(1,n);
+for c = 1:numel(C)
+    b = b + ismembc(I,C(c));
+end
+toc;
+
+tic;
+b = zeros(1,n);
+for c = 1:numel(C)
+    b = b + ismembc2(I,C(c));
+end
+toc;
+
+tic;
+d = zeros(1,n);
+for c = 1:numel(C)
+    d = d + I==C(c);
+end
+toc;
+
+tic;
+d = zeros(1,n);
+repmat(C)
+for c = 1:numel(C)
+    d = d + I.C(c);
+end
+toc;
